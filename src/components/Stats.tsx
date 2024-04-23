@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const Stats = ({
     accuracy,
     wordsTyped,
@@ -9,15 +11,45 @@ const Stats = ({
     className?: string;
     errors: number;
 }) => {
+    const init = { opacity: 0 };
+    const animate = { opacity: 1 };
+    const duration = { duration: 0.3 };
+
     return (
-        <ul
+        <motion.ul
             className={`flex flex-col items-center text-primary-400 space-y-3 ${className}`}
         >
-            <li className="text-xl font-bold">Results</li>
-            <li>Accuracy: {accuracy}%</li>
-            <li className="text-red-600">Errors: {errors}</li>
-            <li>Words Typed: {wordsTyped}</li>
-        </ul>
+            <motion.li 
+                className="text-xl font-bold"
+                initial={init}
+                animate={animate}
+                transition={({...duration, delay: 0})}
+            >
+                Results
+            </motion.li>
+            <motion.li 
+                initial={init}
+                animate={animate}
+                transition={({...duration, delay: 0.5})}
+            >
+                Accuracy: {accuracy}%
+            </motion.li>
+            <motion.li 
+                className="text-red-600"
+                initial={init}
+                animate={animate}
+                transition={({...duration, delay: 1})}
+            >
+                Errors: {errors}
+            </motion.li>
+            <motion.li 
+                initial={init}
+                animate={animate}
+                transition={({...duration, delay: 1.5})}
+            >
+                Words Typed: {wordsTyped}
+            </motion.li>
+        </motion.ul>
     );
 };
 
