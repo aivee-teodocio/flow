@@ -1,3 +1,5 @@
+import TypingCursor from "./TypingCursor";
+
 const UserTypings = ({
     userInput,
     className,
@@ -14,6 +16,7 @@ const UserTypings = ({
                     return <Character key={`${char}-${index}`} char={char}></Character>;
                 })
             }
+            <TypingCursor/>
         </div>
     )
 };
