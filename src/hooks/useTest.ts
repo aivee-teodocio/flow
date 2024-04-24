@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useWords from "./userWords";
+import useWords from "./useWords";
 import useTimer from "./useTimer";
 
 export type State = "start" | "run" | "finish";
