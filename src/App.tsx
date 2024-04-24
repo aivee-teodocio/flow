@@ -3,9 +3,10 @@ import RedoButton from "./components/RedoButton";
 import Stats from "./components/Stats";
 import WordsContainer from "./components/WordsContainer";
 import useTest from "./hooks/useTest";
+import { calculateAccuracy } from "./utils/helpers";
 
 function App() {
-  const { state, words, timeLeft, typed } = useTest();
+  const { state, words, timeLeft, typed, errors, totalCharsTyped, restart } = useTest();
 
   return (
     <>
@@ -15,15 +16,18 @@ function App() {
         userInput={typed}
       />
       <RedoButton 
-        onRestart={() => {}}
+        onRestart={restart}
         className={"mx-auto mt-10 text-slate-500"}
       />
-      <Stats
-        accuracy={0}
-        wordsTyped={0}
-        errors={0}
-        className="mt-10"
-      />
+      { 
+        state === "done" && 
+        <Stats
+          accuracy={calculateAccuracy(errors, totalCharsTyped)}
+          wordsTyped={totalCharsTyped}
+          errors={errors}
+          className="mt-10"
+        />
+      }
     </>
   );
 }
