@@ -3,12 +3,12 @@ import { formatPercentage } from "./../utils/helpers";
 
 const Stats = ({
     accuracy,
-    wordsTyped,
+    charsTyped,
     className,
     errors
 }: {
     accuracy: number;
-    wordsTyped: number;
+    charsTyped: number;
     className?: string;
     errors: number;
 }) => {
@@ -48,7 +48,7 @@ const Stats = ({
                 animate={animate}
                 transition={({...duration, delay: 1.5})}
             >
-                Words Typed: {wordsTyped}
+                Characters Typed: {charsTyped}
             </motion.li>
         </motion.ul>
     );

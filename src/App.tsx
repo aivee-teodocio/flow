@@ -4,9 +4,11 @@ import Stats from "./components/Stats";
 import WordsContainer from "./components/WordsContainer";
 import useTest from "./hooks/useTest";
 import { calculateAccuracy } from "./utils/helpers";
+import { DONE_STATE } from "./constants";
 
 function App() {
   const { state, words, timeLeft, typed, errors, totalCharsTyped, restart } = useTest();
+  const isDone = state === DONE_STATE;
 
   return (
     <>
@@ -20,10 +22,10 @@ function App() {
         className={"mx-auto mt-10 text-slate-500"}
       />
       { 
-        state === "done" && 
+        isDone && 
         <Stats
           accuracy={calculateAccuracy(errors, totalCharsTyped)}
-          wordsTyped={totalCharsTyped}
+          charsTyped={totalCharsTyped}
           errors={errors}
           className="mt-10"
         />

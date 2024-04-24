@@ -3,19 +3,20 @@ import useWords from "./useWords";
 import useTimer from "./useTimer";
 import useTypings from "./useTypings";
 import { countErrors } from "../utils/helpers";
+import { START_STATE, RUN_STATE, DONE_STATE } from "../constants";
 
-export type State = "start" | "run" | "done";
+export type State = typeof START_STATE | typeof RUN_STATE | typeof DONE_STATE;
 
 const NUM_WORDS = 20; // number of words to generate in each batch
 const TIMER_SECS = 30;
 
 const useTest = () => {
-    const [state, setState] = useState<State>("start");
+    const [state, setState] = useState<State>(START_STATE);
     const { words, updateWords } = useWords(NUM_WORDS);
     const { timeLeft, startTimer, resetTimer } = useTimer(TIMER_SECS);
-    const { typed, cursor, clearTyped, resettotalCharsTyped, totalCharsTyped } = useTypings(state !== "done");
+    const { typed, cursor, clearTyped, resettotalCharsTyped, totalCharsTyped } = useTypings(state !== DONE_STATE);
     const [errors, setErrors] = useState(0);
-    const isStarting = state === "start" && cursor > 0;
+    const isStarting = state === START_STATE && cursor > 0;
     const areAllWordsTyped = cursor === words.length;
 
     const calculateErrors = useCallback(() => {
@@ -25,14 +26,14 @@ const useTest = () => {
 
     useEffect(() => {
         if(isStarting) {
-            setState("run");
+            setState(RUN_STATE);
             startTimer();
         }
     }, [isStarting, startTimer, cursor]);
     
     useEffect(() => {
         if(!timeLeft) {
-            setState("done");
+            setState(DONE_STATE);
             calculateErrors();
         }
     }, [timeLeft, calculateErrors]);
@@ -56,7 +57,7 @@ const useTest = () => {
     const restart = useCallback (() => {
         resetTimer();
         resettotalCharsTyped();
-        setState("start");
+        setState(START_STATE);
         setErrors(0);
         updateWords();
         clearTyped();

@@ -1,4 +1,3 @@
-import { text } from "stream/consumers";
 import TypingCursor from "./TypingCursor";
 import cn from "classnames";
 
