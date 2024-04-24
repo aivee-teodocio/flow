@@ -1,11 +1,15 @@
+import { text } from "stream/consumers";
 import TypingCursor from "./TypingCursor";
+import cn from "classnames";
 
 const UserTypings = ({
     userInput,
     className,
+    words
 } : {
     userInput: string,
-    className?: string
+    className?: string,
+    words: string
 }) => {
     const typedChars = userInput.split("");
 
@@ -13,7 +17,13 @@ const UserTypings = ({
         <div className={className}>
             {
                 typedChars.map((char, index) => {
-                    return <Character key={`${char}-${index}`} char={char}></Character>;
+                    return (
+                        <Character 
+                            key={`${char}-${index}`}
+                            actual={char}
+                            expected={words[index]}
+                        />
+                    );
                 })
             }
             <TypingCursor/>
@@ -21,8 +31,21 @@ const UserTypings = ({
     )
 };
 
-const Character = ({ char } : { char: string }) => {
-    return <span className="text-primary-300">{char}</span>;
+const Character = (
+    { actual, expected }: 
+    { actual: string, expected: string }
+) => {
+    const isSpace = expected === " ";
+    console.log(expected, expected === " ")
+    const isRight = actual === expected;
+
+    const className = cn({
+        "text-primary-300": !isSpace && isRight,
+        "text-error-600": !isSpace && !isRight,
+        "bg-error-500/50": isSpace && !isRight
+    });
+
+    return <span className={className}>{expected}</span>;
 };
 
 export default UserTypings;

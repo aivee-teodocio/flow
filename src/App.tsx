@@ -5,12 +5,15 @@ import WordsContainer from "./components/WordsContainer";
 import useTest from "./hooks/useTest";
 
 function App() {
-  const { state, words, timeLeft } = useTest();
+  const { state, words, timeLeft, typed } = useTest();
 
   return (
     <>
       <Timer timeLeft={timeLeft}/>
-      <WordsContainer wordsGenerated={words} />
+      <WordsContainer 
+        wordsGenerated={words}
+        userInput={typed}
+      />
       <RedoButton 
         onRestart={() => {}}
         className={"mx-auto mt-10 text-slate-500"}
