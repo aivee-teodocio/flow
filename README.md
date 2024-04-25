@@ -1,7 +1,7 @@
 # flow
 
 ## Description
-A simple website to help improve your typing speed and accuracy.
+A simple typing test website to help improve your typing speed and accuracy.
 
 ## Result calculations
 Accuracy: [(Number of characters typed correctly) / (Total number of characters typed)] * 100
