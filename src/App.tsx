@@ -3,6 +3,7 @@ import RedoButton from "./components/RedoButton";
 import Stats from "./components/Stats";
 import WordsContainer from "./components/WordsContainer";
 import useTest from "./hooks/useTest";
+import Header from "./components/Header";
 import { calculateAccuracy } from "./utils/helpers";
 import { DONE_STATE } from "./constants";
 
@@ -12,6 +13,7 @@ function App() {
 
   return (
     <>
+      <Header/>
       <Timer timeLeft={timeLeft}/>
       <WordsContainer 
         wordsGenerated={words}

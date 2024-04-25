@@ -7,7 +7,7 @@ A simple website to help improve your typing speed and accuracy.
 - Adding different typing modes
 - The ability to apply themes
 
-## For Devs
+## For devs
 In the project directory, you can run:
 ### `npm start`
 
