@@ -4,11 +4,11 @@ import Stats from "./components/Stats";
 import WordsContainer from "./components/WordsContainer";
 import useTest from "./hooks/useTest";
 import Header from "./components/Header";
-import { calculateAccuracy } from "./utils/helpers";
+import { calculateAccuracy, calculateWordsPerMinute } from "./utils/helpers";
 import { DONE_STATE } from "./constants";
 
 function App() {
-  const { state, words, timeLeft, typed, errors, totalCharsTyped, restart } = useTest();
+  const { state, words, timeLeft, initTime, typed, errors, totalCharsTyped, restart } = useTest();
   const isDone = state === DONE_STATE;
 
   return (
@@ -27,6 +27,7 @@ function App() {
         isDone && 
         <Stats
           accuracy={calculateAccuracy(errors, totalCharsTyped)}
+          wpm={calculateWordsPerMinute(initTime, errors, totalCharsTyped)}
           charsTyped={totalCharsTyped}
           errors={errors}
           className="mt-10"

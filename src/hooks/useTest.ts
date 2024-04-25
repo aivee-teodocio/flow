@@ -8,12 +8,12 @@ import { START_STATE, RUN_STATE, DONE_STATE } from "../constants";
 export type State = typeof START_STATE | typeof RUN_STATE | typeof DONE_STATE;
 
 const NUM_WORDS = 20; // number of words to generate in each batch
-const TIMER_SECS = 30;
+const INIT_TIME_SECS = 30;
 
 const useTest = () => {
     const [state, setState] = useState<State>(START_STATE);
     const { words, updateWords } = useWords(NUM_WORDS);
-    const { timeLeft, startTimer, resetTimer } = useTimer(TIMER_SECS);
+    const { timeLeft, startTimer, resetTimer } = useTimer(INIT_TIME_SECS);
     const { typed, cursor, clearTyped, resettotalCharsTyped, totalCharsTyped } = useTypings(state !== DONE_STATE);
     const [errors, setErrors] = useState(0);
     const isStarting = state === START_STATE && cursor > 0;
@@ -63,7 +63,16 @@ const useTest = () => {
         clearTyped();
     }, [clearTyped, updateWords, resetTimer, resettotalCharsTyped]);
 
-    return { state, words, timeLeft, typed, errors, totalCharsTyped, restart };
+    return { 
+        state, 
+        words, 
+        timeLeft, 
+        initTime: INIT_TIME_SECS, 
+        typed, 
+        errors, 
+        totalCharsTyped, 
+        restart 
+    };
 };
 
 export default useTest;

@@ -3,11 +3,13 @@ import { formatPercentage } from "./../utils/helpers";
 
 const Stats = ({
     accuracy,
+    wpm,
     charsTyped,
     className,
     errors
 }: {
     accuracy: number;
+    wpm: number;
     charsTyped: number;
     className?: string;
     errors: number;
@@ -36,17 +38,24 @@ const Stats = ({
                 Accuracy: {formatPercentage(accuracy)}
             </motion.li>
             <motion.li 
-                className="text-red-600"
                 initial={init}
                 animate={animate}
                 transition={({...duration, delay: 1})}
+            >
+                WPM: {wpm}
+            </motion.li>
+            <motion.li 
+                className="text-red-600"
+                initial={init}
+                animate={animate}
+                transition={({...duration, delay: 1.5})}
             >
                 Errors: {errors}
             </motion.li>
             <motion.li 
                 initial={init}
                 animate={animate}
-                transition={({...duration, delay: 1.5})}
+                transition={({...duration, delay: 2})}
             >
                 Characters Typed: {charsTyped}
             </motion.li>

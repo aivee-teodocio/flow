@@ -3,6 +3,11 @@
 ## Description
 A simple website to help improve your typing speed and accuracy.
 
+## Result calculations
+Accuracy: [(Number of characters typed correctly) / (Total number of characters typed)] * 100
+
+WPM: [(Number of characters typed correctly) / 5] / (Initial time in minutes)
+
 ## In progress
 - Adding different typing modes
 - The ability to apply themes

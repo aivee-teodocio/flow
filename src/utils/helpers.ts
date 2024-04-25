@@ -14,10 +14,19 @@ const countErrors = (actual: string, expected: string) => {
     }, 0);
 }
 
-const calculateAccuracy = (errors: number, totalTyped: number) => {
-    if(totalTyped > 0) {
-        const amountCorrect = totalTyped - errors;
-        return (amountCorrect / totalTyped) * 100;
+const calculateAccuracy = (totalErrors: number, totalCharsTyped: number) => {
+    if(totalCharsTyped > 0) {
+        const totalCorrect = totalCharsTyped - totalErrors;
+        return (totalCorrect / totalCharsTyped) * 100;
+    }
+    return 0;
+}
+
+const calculateWordsPerMinute = (timeSecs: number, totalErrors: number, totalCharsTyped: number) => {
+    if(totalCharsTyped > 0) {
+        const totalCorrect = totalCharsTyped - totalErrors;
+        const timeMins = timeSecs / 60;
+        return Math.floor((totalCorrect / 5) / timeMins);
     }
     return 0;
 }
@@ -25,5 +34,6 @@ const calculateAccuracy = (errors: number, totalTyped: number) => {
 export {
     formatPercentage,
     countErrors,
-    calculateAccuracy
+    calculateAccuracy,
+    calculateWordsPerMinute
 }
