@@ -1,4 +1,3 @@
-import Timer from "./components/Timer";
 import RedoButton from "./components/RedoButton";
 import Stats from "./components/Stats";
 import WordsContainer from "./components/WordsContainer";
@@ -6,15 +5,20 @@ import useTest from "./hooks/useTest";
 import Header from "./components/Header";
 import { calculateAccuracy, calculateWordsPerMinute } from "./utils/helpers";
 import { DONE_STATE } from "./constants";
+import ModeSelector from "./components/ModeSelector";
 
 function App() {
-  const { state, words, timeLeft, initTime, typed, errors, totalCharsTyped, restart } = useTest();
+  const { state, typingMode, words, timeLeft, initTime, typed, errors, totalCharsTyped, restart, changeMode } = useTest();
   const isDone = state === DONE_STATE;
 
   return (
     <>
       <Header/>
-      <Timer timeLeft={timeLeft}/>
+      <ModeSelector 
+        timeLeft={timeLeft}
+        changeMode={changeMode}
+        currentMode={typingMode}
+      />
       <WordsContainer 
         wordsGenerated={words}
         userInput={typed}
