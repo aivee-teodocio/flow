@@ -8,7 +8,9 @@ const Header = () => {
     }, []);
 
     return (
-        <h1 className=" text-primary-400 text-xl text-center mb-4 font-bold">   {appName} </h1>
+        <h1 className=" text-primary-400 text-2xl text-center mb-4 font-bold">   
+            {appName}
+        </h1>
     );
 }
 

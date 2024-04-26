@@ -8,7 +8,7 @@ import { DONE_STATE } from "./constants";
 import ModeSelector from "./components/ModeSelector";
 
 function App() {
-  const { state, typingMode, words, timeLeft, initTime, typed, errors, totalCharsTyped, restart, changeMode } = useTest();
+  const { state, typingMode, wordCount, words, timeLeft, initTime, typed, errors, totalCharsTyped, restart, changeMode, changeWordCount } = useTest();
   const isDone = state === DONE_STATE;
 
   return (
@@ -18,6 +18,8 @@ function App() {
         timeLeft={timeLeft}
         changeMode={changeMode}
         currentMode={typingMode}
+        changeWordCount={changeWordCount}
+        currentWordCount={wordCount}
       />
       <WordsContainer 
         wordsGenerated={words}
