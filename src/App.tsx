@@ -3,6 +3,7 @@ import Stats from "./components/Stats";
 import WordsContainer from "./components/WordsContainer";
 import useTest from "./hooks/useTest";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import { calculateAccuracy, calculateWordsPerMinute } from "./utils/helpers";
 import { DONE_STATE } from "./constants";
 import ModeSelector from "./components/ModeSelector";
@@ -39,6 +40,7 @@ function App() {
           className="mt-10"
         />
       }
+      <Footer />
     </>
   );
 }

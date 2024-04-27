@@ -18,6 +18,16 @@ const Stats = ({
     const animate = { opacity: 1 };
     const duration = { duration: 0.3 };
 
+    const delayIncrement = 0.5;
+    let currDelay = 0;
+
+    const stats = [
+        { label: "WPM", val: wpm },
+        { label: "Accuracy", val: formatPercentage(accuracy) },
+        { label: "Errors", val: errors },
+        { label: "Characters Typed", val: charsTyped }
+    ];
+
     return (
         <motion.ul
             className={`flex flex-col items-center text-primary-400 space-y-3 ${className}`}
@@ -26,39 +36,24 @@ const Stats = ({
                 className="text-xl font-bold"
                 initial={init}
                 animate={animate}
-                transition={({...duration, delay: 0})}
+                transition={({...duration, delay: currDelay})}
             >
                 Results
             </motion.li>
-            <motion.li 
-                initial={init}
-                animate={animate}
-                transition={({...duration, delay: 0.5})}
-            >
-                Accuracy: {formatPercentage(accuracy)}
-            </motion.li>
-            <motion.li 
-                initial={init}
-                animate={animate}
-                transition={({...duration, delay: 1})}
-            >
-                WPM: {wpm}
-            </motion.li>
-            <motion.li 
-                className="text-red-600"
-                initial={init}
-                animate={animate}
-                transition={({...duration, delay: 1.5})}
-            >
-                Errors: {errors}
-            </motion.li>
-            <motion.li 
-                initial={init}
-                animate={animate}
-                transition={({...duration, delay: 2})}
-            >
-                Characters Typed: {charsTyped}
-            </motion.li>
+            {
+                stats.map(({label, val}, index) => {
+                    currDelay += delayIncrement; 
+                    return (
+                        <motion.li
+                            initial={init}
+                            animate={animate}
+                            transition={({...duration, delay: currDelay})}
+                        >
+                            {`${label}: ${val}`}
+                        </motion.li>
+                    );
+                })
+            }
         </motion.ul>
     );
 };

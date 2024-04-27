@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { MdRefresh } from "react-icons/md";
 
 const RedoButton = ({
@@ -15,11 +15,25 @@ const RedoButton = ({
         handleRestart();
     };
 
+    const keydownHandler = useCallback(({ key }: KeyboardEvent) => {
+        if(key === "Shift") {
+            handleRestart();
+            window.focus();
+        }
+    }, []);
+
+    useEffect(() => {
+        window.addEventListener("keydown", keydownHandler);
+        return () => {
+            window.removeEventListener("keydown", keydownHandler);
+        };
+    }, [keydownHandler])
+
     return (
         <button
             ref={buttonRef}
             onClick={handleClick}
-            className={`block rounded px-8 py-2 hover: bg-slate-700 ${className}`}
+            className={`block rounded px-8 py-2 bg-slate-700 hover:bg-slate-900 ${className}`}
         >
             <MdRefresh className="w-6 h-6"/>
         </button>
