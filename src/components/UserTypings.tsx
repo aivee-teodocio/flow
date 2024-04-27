@@ -35,11 +35,10 @@ const Character = (
     { actual: string, expected: string }
 ) => {
     const isSpace = expected === " ";
-    console.log(expected, expected === " ")
     const isRight = actual === expected;
 
     const className = cn({
-        "text-primary-300": !isSpace && isRight,
+        "text-primary-400": !isSpace && isRight,
         "text-error-600": !isSpace && !isRight,
         "bg-error-500/50": isSpace && !isRight
     });
