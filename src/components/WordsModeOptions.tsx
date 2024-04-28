@@ -24,7 +24,10 @@ const WordsModeOptions = ({
                                 text={`${wordCount}`}
                                 onClick={() => changeWordCount(wordCount)}
                             />
-                            { (index < options.length - 1) && <text className="mx-1"> / </text> }
+                            { 
+                                (index < options.length - 1) && 
+                                <span className="mx-1"> / </span> 
+                            }
                         </>
                     )
                 })

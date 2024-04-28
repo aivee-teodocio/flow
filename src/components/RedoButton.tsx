@@ -33,7 +33,7 @@ const RedoButton = ({
         <button
             ref={buttonRef}
             onClick={handleClick}
-            className={`block rounded px-8 py-2 bg-slate-700 hover:bg-slate-900 ${className}`}
+            className={`block rounded px-8 py-2 bg-slate-800 hover:bg-slate-900 ${className}`}
         >
             <MdRefresh className="w-6 h-6"/>
         </button>

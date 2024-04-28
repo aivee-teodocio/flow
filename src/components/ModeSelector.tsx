@@ -45,7 +45,7 @@ const ModeSelector = ({
                     text="Timer"
                     onClick={changeToTimerMode}
                 ></ModeButton>
-                <text className="mx-1"> / </text>
+                <span className="mx-1"> / </span>
                 <ModeButton 
                     className={isTimerMode ? "" : underlineStyle}
                     text="Words"

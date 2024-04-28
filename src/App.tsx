@@ -3,7 +3,7 @@ import Stats from "./components/Stats";
 import WordsContainer from "./components/WordsContainer";
 import useTest from "./hooks/useTypingTest";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
+import KeyboardShortcutsText from "./components/KeyboardShortcutsText";
 import { calculateAccuracy, calculateWordsPerMinute } from "./utils/helpers";
 import { DONE_STATE, TIMER_MODE } from "./constants";
 import ModeSelector from "./components/ModeSelector";
@@ -31,6 +31,7 @@ function App() {
         onRestart={restart}
         className={"mx-auto mt-10 text-slate-500"}
       />
+      <KeyboardShortcutsText/>
       { 
         isDone && 
         <Stats
@@ -41,7 +42,6 @@ function App() {
           className="mt-10"
         />
       }
-      <Footer />
     </>
   );
 }
