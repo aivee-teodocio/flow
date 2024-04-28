@@ -1,34 +1,33 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const useTimer = (time: number ) => {
-    const [timeLeft, setTimeLeft] = useState(time);
+const useTimer = (initTime: number, isTimerMode: boolean, areAllWordsTyped: boolean) => {
+    const [time, setTime] = useState(initTime);
     const intervalRef = useRef<NodeJS.Timer | null>(null);
 
     const startTimer = useCallback(() => {
-        console.log("starting timer.");
-
         intervalRef.current = setInterval(() => {
-            setTimeLeft(timeLeft => timeLeft - 1);
+            if (isTimerMode) { // if in timer mode, calculate time left
+                setTime(time => time - 1);
+            } else { //if in words mode, calculcate time elapsed
+                setTime(time => time + 1);
+            }
         }, 1000);
-    }, [setTimeLeft]);
+    }, [isTimerMode]);
 
     const resetTimer = useCallback(() => {
-        console.log("resetting timer.");
-
         if(intervalRef.current) {
             clearInterval(intervalRef.current);
         }
-        setTimeLeft(time);
-    }, [time]);
+        setTime(initTime); // bring timer back to set initial value
+    }, [initTime, setTime]);
 
     useEffect(() => {
-        if(!timeLeft && intervalRef.current) {
-            console.log("resetting timer.");
+        if(((isTimerMode && !time) || (!isTimerMode && areAllWordsTyped)) && intervalRef.current) {
             clearInterval(intervalRef.current);
         }
-    }, [timeLeft, intervalRef]);
+    }, [time, isTimerMode, areAllWordsTyped, intervalRef]);
 
-    return { timeLeft, startTimer, resetTimer };
+    return { time, startTimer, resetTimer };
 };
 
 export default useTimer;

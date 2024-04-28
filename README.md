@@ -1,7 +1,7 @@
 # flow
 
 ## Description
-A simple typing test website to help improve your typing speed and accuracy.
+[Flow](https://aivee-teodocio.github.io/flow/) is a simple typing test website to help improve your typing speed and accuracy.
 
 ## Result calculations
 Accuracy: [(Number of characters typed correctly) / (Total number of characters typed)] * 100

@@ -9,7 +9,7 @@ const Stats = ({
     errors
 }: {
     accuracy: number;
-    wpm: number;
+    wpm?: number;
     charsTyped: number;
     className?: string;
     errors: number;
@@ -45,6 +45,7 @@ const Stats = ({
                     currDelay += delayIncrement; 
                     return (
                         <motion.li
+                            key={`${label}`}
                             initial={init}
                             animate={animate}
                             transition={({...duration, delay: currDelay})}

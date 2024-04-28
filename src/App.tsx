@@ -1,22 +1,23 @@
 import RedoButton from "./components/RedoButton";
 import Stats from "./components/Stats";
 import WordsContainer from "./components/WordsContainer";
-import useTest from "./hooks/useTest";
+import useTest from "./hooks/useTypingTest";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { calculateAccuracy, calculateWordsPerMinute } from "./utils/helpers";
-import { DONE_STATE } from "./constants";
+import { DONE_STATE, TIMER_MODE } from "./constants";
 import ModeSelector from "./components/ModeSelector";
 
 function App() {
-  const { state, typingMode, wordCount, words, timeLeft, initTime, typed, errors, totalCharsTyped, restart, changeMode, changeWordCount } = useTest();
+  const { state, typingMode, wordCount, words, time, initTime, typed, errors, totalCharsTyped, restart, changeMode, changeWordCount } = useTest();
   const isDone = state === DONE_STATE;
+  const isTimerMode = typingMode === TIMER_MODE;
 
   return (
     <>
       <Header/>
       <ModeSelector 
-        timeLeft={timeLeft}
+        timeLeft={time}
         changeMode={changeMode}
         currentMode={typingMode}
         changeWordCount={changeWordCount}
@@ -34,7 +35,7 @@ function App() {
         isDone && 
         <Stats
           accuracy={calculateAccuracy(errors, totalCharsTyped)}
-          wpm={calculateWordsPerMinute(initTime, errors, totalCharsTyped)}
+          wpm={calculateWordsPerMinute(isTimerMode ? initTime : time, errors, totalCharsTyped)}
           charsTyped={totalCharsTyped}
           errors={errors}
           className="mt-10"

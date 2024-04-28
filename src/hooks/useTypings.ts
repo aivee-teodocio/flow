@@ -19,7 +19,7 @@ const useTypings = (enabled: boolean) => {
         setCursor(0);
     }, []);
 
-    const resettotalCharsTyped = useCallback(() => {
+    const resetTotalCharsTyped = useCallback(() => {
         totalCharsTyped.current = 0;
     }, []);
 
@@ -53,7 +53,7 @@ const useTypings = (enabled: boolean) => {
         typed,
         cursor,
         clearTyped,
-        resettotalCharsTyped,
+        resetTotalCharsTyped,
         totalCharsTyped: totalCharsTyped.current
     }
 };

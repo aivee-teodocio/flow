@@ -1,4 +1,4 @@
-import { TypingMode } from "../hooks/useTest";
+import { TypingMode } from "../hooks/useTypingTest";
 import Timer from "./Timer";
 import { TIMER_MODE, WORDS_MODE } from "../constants";
 import ModeButton from "./ModeButton";
@@ -29,7 +29,7 @@ const ModeSelector = ({
     }
 
     return (
-        <div className="flex justify-between text-primary-400 text-lg">
+        <div className="flex justify-between text-primary-400 text-lg font-semibold">
             { 
                 isTimerMode ? 
                     <Timer timeLeft={timeLeft} /> :
