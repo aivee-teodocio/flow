@@ -1,4 +1,4 @@
-# flow
+# Flow
 
 ## Description
 [Flow](https://aivee-teodocio.github.io/flow/) is a simple typing test website to help improve your typing speed and accuracy.
