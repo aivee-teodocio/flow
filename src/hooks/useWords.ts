@@ -1,10 +1,6 @@
-import { faker } from "@faker-js/faker";
 import { useCallback, useState } from "react";
 import { DEFAULT_WORD_COUNT } from "../constants";
-
-const generateWords = (count: number) => {
-    return faker.word.words(count).toLowerCase();
-}
+import { generateWords } from "../utils/helpers";
 
 const useWords = () => {
     const [wordCount, setWordCount] = useState(DEFAULT_WORD_COUNT);

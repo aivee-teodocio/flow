@@ -1,3 +1,5 @@
+import allWords from "../assets/words";
+
 const formatPercentage = (percentage: number) => {
     return percentage.toFixed(0) + '%';
 }
@@ -31,9 +33,27 @@ const calculateWordsPerMinute = (timeSecs: number, totalErrors: number, totalCha
     return 0;
 }
 
+const generateWords = (numWords: number) => {
+    let wordsList = "";
+    let count = 0;
+
+    if(numWords > 0) {
+        while(count < numWords) {
+            const nextWord = allWords[Math.floor(Math.random() * allWords.length)];
+            wordsList += nextWord.toLowerCase();
+            if(count < numWords - 1)
+                wordsList += " ";
+            count++;
+        }
+    }
+
+    return wordsList;
+}
+
 export {
     formatPercentage,
     countErrors,
     calculateAccuracy,
-    calculateWordsPerMinute
+    calculateWordsPerMinute,
+    generateWords
 }
