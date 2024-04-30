@@ -3,20 +3,16 @@ import useWords from "./useWords";
 import useTimer from "./useTimer";
 import useTypings from "./useTypings";
 import { countErrors } from "../utils/helpers";
-import { START_STATE, RUN_STATE, DONE_STATE, WORDS_MODE, TIMER_MODE } from "../constants";
+import { START_STATE, RUN_STATE, DONE_STATE, WORDS_MODE, TIMER_MODE, DEFAULT_TIME_SECS } from "../constants";
 
 export type State = typeof START_STATE | typeof RUN_STATE | typeof DONE_STATE;
 export type TypingMode = typeof WORDS_MODE | typeof TIMER_MODE;
 
-const INIT_TIME_SECS = 30;
-const DEFAULT_WORD_COUNT = 25;
-
 const useTypingTest = () => {
     const [state, setState] = useState<State>(START_STATE);
     const [typingMode, setTypingMode] = useState<TypingMode>(TIMER_MODE);
-    const [wordCount, setWordCount] = useState(DEFAULT_WORD_COUNT);
-    const [initTime, setInitTime] = useState(INIT_TIME_SECS);
-    const {words, updateWords} = useWords(wordCount);
+    const [initTime, setInitTime] = useState(DEFAULT_TIME_SECS);
+    const {words, wordCount, updateWords, updateWordCount} = useWords();
     const isTimerMode = typingMode === TIMER_MODE;
     const {typed, cursor, clearTyped, resetTotalCharsTyped, totalCharsTyped} = useTypings(state !== DONE_STATE);
     const [errors, setErrors] = useState(0);
@@ -74,19 +70,11 @@ const useTypingTest = () => {
 
     const changeMode = useCallback((newMode: TypingMode) => {
         setTypingMode(newMode);
-        setInitTime(isTimerMode ? INIT_TIME_SECS : 0);
-        resetTimer();
-        resetTotalCharsTyped();
-        setState(START_STATE);
-        setErrors(0);
-        clearTyped();
-        updateWords();
-        
-    }, [isTimerMode, resetTimer, clearTyped, resetTotalCharsTyped, updateWords]);
+    }, []);
 
     useEffect(() => {
         if(isTimerMode) {
-            setInitTime(INIT_TIME_SECS);
+            setInitTime(DEFAULT_TIME_SECS);
         } else {
             setInitTime(0);
         }
@@ -97,6 +85,7 @@ const useTypingTest = () => {
         clearTyped();
         updateWords();
     }, [
+        wordCount,
         isTimerMode,
         clearTyped,
         typingMode,
@@ -106,15 +95,20 @@ const useTypingTest = () => {
         resetTotalCharsTyped
     ])
 
-    const changeWordCount = useCallback((newWordCount: number) => {
-        setInitTime(isTimerMode ? INIT_TIME_SECS : 0);
-        resetTimer();
-        resetTotalCharsTyped();
-        setState(START_STATE);
-        setErrors(0);
-        clearTyped();
-        setWordCount(newWordCount)
-    }, [isTimerMode, clearTyped, resetTimer, resetTotalCharsTyped])
+    // for restart shortcut
+    const keydownHandler = useCallback(({ key }: KeyboardEvent) => {
+        if(key === "Shift") {
+            restart();
+            window.focus();
+        }
+    }, [restart]);
+
+    useEffect(() => {
+        window.addEventListener("keydown", keydownHandler);
+        return () => {
+            window.removeEventListener("keydown", keydownHandler);
+        };
+    }, [keydownHandler]);
 
     return { 
         state,
@@ -128,7 +122,7 @@ const useTypingTest = () => {
         totalCharsTyped,
         restart,
         changeMode,
-        changeWordCount
+        changeWordCount: updateWordCount
     };
 };
 

@@ -15,20 +15,6 @@ const RedoButton = ({
         handleRestart();
     };
 
-    const keydownHandler = useCallback(({ key }: KeyboardEvent) => {
-        if(key === "Shift") {
-            handleRestart();
-            window.focus();
-        }
-    }, []);
-
-    useEffect(() => {
-        window.addEventListener("keydown", keydownHandler);
-        return () => {
-            window.removeEventListener("keydown", keydownHandler);
-        };
-    }, [keydownHandler])
-
     return (
         <button
             ref={buttonRef}

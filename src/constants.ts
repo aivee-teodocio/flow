@@ -1,3 +1,5 @@
+const DEFAULT_WORD_COUNT = 25;
+const DEFAULT_TIME_SECS = 30;
 // state constants
 const START_STATE = "start";
 const RUN_STATE = "run";
@@ -11,6 +13,8 @@ const WORDS_MODE = "words";
 const WORD_MODE_OPTIONS = [10, 25, 50];
 
 export {
+    DEFAULT_WORD_COUNT,
+    DEFAULT_TIME_SECS,
     START_STATE,
     RUN_STATE,
     DONE_STATE,
