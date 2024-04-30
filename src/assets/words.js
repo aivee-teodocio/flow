@@ -567,7 +567,7 @@ const allWords = [
     "nothing",
     "notice",
     "now",
-    "n't",
+    "not",
     "number",
     "occur",
     "of",
