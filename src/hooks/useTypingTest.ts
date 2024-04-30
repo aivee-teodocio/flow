@@ -97,7 +97,7 @@ const useTypingTest = () => {
 
     // for restart shortcut
     const keydownHandler = useCallback(({ key }: KeyboardEvent) => {
-        if(key === "Shift") {
+        if(key === "Escape") {
             restart();
             window.focus();
         }
