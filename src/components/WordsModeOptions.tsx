@@ -13,7 +13,6 @@ const WordsModeOptions = ({
 
     return (
         <div>
-            <span className="mr-2">Words:</span>
             {
                 options.map((wordCount, index) => {
                     return (
