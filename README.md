@@ -11,8 +11,8 @@ Timer mode: Type as many words as you can until the timer runs out
 **Accuracy**: [(Number of characters typed correctly) / (Total number of characters typed)] * 100
 
 **WPM**: [(Number of characters typed correctly) / 5] / **k**  
-In *words* mode, k = Initial time in minutes  
-In *timer* mode, k = Time elapsed until all words are typed in minutes
+In *timer* mode, k = Initial time in minutes  
+In *words* mode, k = Time elapsed in minutes until all words are typed
 
 ## In progress
 - Adding different typing modes
